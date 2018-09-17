@@ -2,8 +2,8 @@
 PRACTICE Exam 1, problem 1.
 
 Authors: David Mutchler, Vibha Alangar, Valerie Galluzzi, Mark Hays,
-         Amanda Stouder, their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         Amanda Stouder, their colleagues and Dylan Verst.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 ########################################################################
 # Students:
@@ -27,6 +27,7 @@ Authors: David Mutchler, Vibha Alangar, Valerie Galluzzi, Mark Hays,
 
 import testing_helper
 import time
+import math
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
 
 
 ########################################################################
-# TODO: 2.  READ the green doc-string for the:
+# DONE: 2.  READ the green doc-string for the:
 #   - is_prime
 #   - sum_of_digits
 # functions defined below.  You do NOT need to understand their
@@ -105,7 +106,7 @@ def sum_of_digits(number):
 def run_test_problem1a():
     """ Tests the   problem1a   function. """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement this TEST function.
+    # DONE: 3. Implement this TEST function.
     #   It TESTS the  problem1a  function defined below.
     #   Include at least **   4   ** tests (we wrote two for you).
     # ------------------------------------------------------------------
@@ -130,9 +131,20 @@ def run_test_problem1a():
 
     # Test 2:
     expected = 1.278  # This is APPROXIMATELY the correct answer.
-    print_expected_result_of_test([30, 100], expected, test_results,
-                                  format_string)
+    print_expected_result_of_test([30, 100], expected, test_results, format_string)
     actual = problem1a(30, 100)
+    print_actual_result_of_test(expected, actual, test_results)
+
+    # Test 3:
+    expected = -1.670  # This is APPROXIMATELY the correct answer.
+    print_expected_result_of_test([3, 10], expected, test_results, format_string)
+    actual = problem1a(3, 10)
+    print_actual_result_of_test(expected, actual, test_results)
+
+    # Test 4:
+    expected = 0.09080  # This is APPROXIMATELY the correct answer.
+    print_expected_result_of_test([3, 100], expected, test_results, format_string)
+    actual = problem1a(3, 100)
     print_actual_result_of_test(expected, actual, test_results)
 
     # ------------------------------------------------------------------
@@ -144,6 +156,15 @@ def run_test_problem1a():
     #   print('Test 1 expected:', expected)
     #   print('       actual:  ', actual)
     #  ------------------------------------------------------------------
+    expected = 0.105
+    actual = problem1a(3, 4)
+    print('Test 5 expected:', expected)
+    print('       actual:  ', actual)
+
+    expected = 0.063
+    actual = problem1a(2, 3)
+    print('Test 6 expected:', expected)
+    print('       actual:  ', actual)
 
 
 def problem1a(m, n):
@@ -164,7 +185,7 @@ def problem1a(m, n):
       -- If m is 30 and n is 100, the correct answer is about 1.278.
     """
     # ------------------------------------------------------------------
-    # TODO: 4. Implement and test this function.
+    # DONE: 4. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     # ------------------------------------------------------------------
     # ------------------------------------------------------------------
@@ -172,12 +193,16 @@ def problem1a(m, n):
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 minutes.
     # ------------------------------------------------------------------
+    s = 0
+    for i in range(n ** 2 - m ** 2 + 1):
+        s = s + math.sin(m ** 2 + i)
+    return s
 
 
 def run_test_problem1b():
     """ Tests the   problem1b   function. """
     # ------------------------------------------------------------------
-    # TODO: 5. Implement this TEST function.
+    # DONE: 5. Implement this TEST function.
     #   It TESTS the  problem1b  function defined below.
     #   Include at least **   4   ** tests.  Use the usual form:
     #
@@ -194,6 +219,26 @@ def run_test_problem1b():
     print('--------------------------------------------------')
     print('Testing the   problem1b   function:')
     print('--------------------------------------------------')
+
+    expected = 2
+    actual = problem1b(3, 2)
+    print('Test 1 expected:  ', expected)
+    print('       actual:    ', actual)
+
+    expected = 8
+    actual = problem1b(2, 10)
+    print('Test 2 expected:  ', expected)
+    print('       actual:    ', actual)
+
+    expected = 2
+    actual = problem1b(4, 2)
+    print('Test 2 expected:  ', expected)
+    print('       actual:    ', actual)
+
+    expected = 4
+    actual = problem1b(10, 2)
+    print('Test 2 expected:  ', expected)
+    print('       actual:    ', actual)
 
 
 def problem1b(m, f):
@@ -213,7 +258,7 @@ def problem1b(m, f):
            since there are 44 primes between 5 and 200.
      """
     # ------------------------------------------------------------------
-    # TODO: 6. Implement and test this function.
+    # DONE: 6. Implement and test this function.
     #   Note that you should write its TEST function first (above).
     #
     ####################################################################
@@ -226,6 +271,11 @@ def problem1b(m, f):
     #    DIFFICULTY:      5
     #    TIME ESTIMATE:   10 to 15 minutes.
     # ------------------------------------------------------------------
+    count = 0
+    for i in range(f * m - m + 1):
+        if is_prime(m + i) is True:
+            count = count + 1
+    return count
 
 
 def run_test_problem1c():
@@ -249,7 +299,6 @@ def run_test_problem1c():
     print_expected_result_of_test([11], expected, test_results, format_string)
     actual = problem1c(11)
     print_actual_result_of_test(expected, actual, test_results)
-
 
     # Test 3:
     expected = 33
@@ -307,7 +356,7 @@ def problem1c(n):
            and the sum of the digits in 223092870 is 33.
     """
     # ------------------------------------------------------------------
-    # TODO: 7. Implement and test this function.
+    # DONE: 7. Implement and test this function.
     #          Tests have been written for you (above).
     #
     ####################################################################
@@ -321,6 +370,11 @@ def problem1c(n):
     #    DIFFICULTY:      7
     #    TIME ESTIMATE:   15 to 20 minutes.
     # ------------------------------------------------------------------
+    product = 1
+    for i in range(n - 1):
+        if is_prime(i+2) is True:
+            product = product * (i+2)
+    return sum_of_digits(product)
 
 
 ###############################################################################
